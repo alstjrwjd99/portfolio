@@ -79,39 +79,43 @@ export const vueProjects = [
 		title: "멀캠 맛지도",
 		description: (
 			<>
-				1. Slack 메시지에서 음식점 정보를 수집
+				Slack 채널 속 맛집 정보를 자동 수집하고
 				<br />
-				2. Spring 서버에 저장
-				<br />
-				3. Vue에서 지도 마커로 시각화
+				지도에 시각화한 실사용형 웹 서비스
 			</>
 		),
 		icon: <MapPin className="h-10 w-10 text-primary" />,
-		tags: ["Vue", "Spring Boot", "Slack API", "Naver 지도 API", "EC2", "Vercel", "Mysql"],
+		tags: ["Vue", "Spring Boot", "Slack API", "Naver 지도 API", "EC2", "Vercel", "Docker", "MySQL"],
 		content: (
 			<>
 				<p className="mb-2">
-					<span className="text-primary font-semibold">슬랙 메시지 속 음식점 정보를 자동 수집</span>하고 이를 지도로
-					시각화하는 서비스를 개발했습니다.
+					부트캠프 팀원들이 추천한 맛집 정보가 Slack 채널에 누적되지만, 필요할 땐 검색이 어려웠습니다. 이 문제를
+					해결하기 위해 <span className="text-primary font-semibold">Slack 메시지를 자동 수집</span>하고, 이를{" "}
+					<span className="text-primary font-semibold">Naver 지도 위에 시각화</span>하는 서비스를 개발했습니다.
 				</p>
 				<p className="mb-2">
-					Slack bot을 통해 수집한 메시지를 <span className="text-primary font-semibold">Spring Boot 서버</span>에
-					저장하고,
-					<span className="text-primary font-semibold">Naver 지도 API</span>와 연동하여 Vue 프론트엔드에서 마커로
-					표시했습니다.
-					<span className="text-primary font-semibold">EC2</span>와{" "}
-					<span className="text-primary font-semibold">Vercel</span>을 사용해 백엔드와 프론트엔드를 각각 배포했습니다.
+					Slack Webhook을 활용해 메시지를 받아 <span className="font-semibold">Spring Boot 서버</span>에 저장하고,
+					<code>marker-tools.js</code> 기반의 클러스터링을 적용해{" "}
+					<span className="text-primary font-semibold">마커가 많아도 성능 저하 없이 표시</span>할 수 있도록
+					설계했습니다.
 				</p>
 				<p className="mb-2">
-					지도 마커 클릭 시 사이드바에서 <span className="text-primary font-semibold">대표 이미지, 댓글, 별점</span> 등
-					상세 정보 확인이 가능하며,
-					<span className="text-primary font-semibold">리뷰 작성 및 자동 갱신</span> 기능도 구현했습니다.
+					지도 마커 클릭 시 <span className="text-primary font-semibold">대표 이미지, 별점, 댓글</span> 등 상세 정보를
+					확인할 수 있으며,
+					<span className="text-primary font-semibold">로그인 여부에 따라 리뷰 작성 제한</span>도 구현했습니다. 사용자
+					UX 향상을 위해 <span className="text-primary font-semibold">모바일 화면에선 슬라이드형 UI</span>로
+					구성했습니다.
+				</p>
+				<p className="mb-2">
+					또한, 오픈소스 기반으로 운영되는 만큼, <span className="font-semibold">API 키 보안 관리</span>를 위해
+					<code>GitHub Secrets</code>와 Docker의 <code>--build-arg</code>를 활용한 안전한 배포 구조를 설계했습니다.
 				</p>
 				<p>
-					실제 슬랙 채널에서 수집한 데이터를 기반으로{" "}
-					<span className="text-primary font-semibold">사용자들에게 유용한 정보를 자동 제공</span>하고,
-					<span className="text-primary font-semibold">시각적 경험을 향상시킨 점</span>에서 높은 사용자 만족도를
-					얻었습니다.
+					이 프로젝트를 통해{" "}
+					<span className="text-primary font-semibold">실사용 문제를 정의하고 서비스화하는 능력</span>,
+					<span className="text-primary font-semibold">API 보안 관리 및 배포 자동화 역량</span>,
+					<span className="text-primary font-semibold">사용자 경험 중심의 프론트 설계</span>를 함께 성장시킬 수
+					있었습니다.
 				</p>
 			</>
 		),
@@ -120,16 +124,49 @@ export const vueProjects = [
 	},
 	{
 		title: "코인게임",
-		description: "실시간 대전으로 숫자 10을 만드는 게임",
+		description: (
+			<>
+				실시간 대전으로 숫자 10을 먼저 만드는
+				<br />
+				Vue + WebSocket 기반의 게임 서비스
+			</>
+		),
 		icon: <Sparkles className="h-10 w-10 text-primary" />,
-		tags: ["Vue", "Spring Boot", "WebSocket", "EC2", "Github Actions", "Docker", "RDS"],
-	},
-	{
-		title: "국평오",
-		description: "투표를 통해 자신의 정도를 파악하는 통계사이트",
-		icon: <Utensils className="h-10 w-10 text-primary" />,
-		tags: ["Vue", "Spring Boot"],
-		demo: "https://avg5.vercel.app/",
+		tags: ["Vue", "Spring Boot", "WebSocket", "EC2", "Docker", "Github Actions", "RDS"],
+		content: (
+			<>
+				<p className="mb-2">
+					<span className="text-primary font-semibold">실시간 사용자 간 대전이 가능한 숫자 게임</span>으로, 각자가 1~4
+					사이의 숫자를 순서대로 제출해 합이 정확히 10이 되는 순간 승리하는 구조입니다.
+				</p>
+				<p className="mb-2">
+					게임의 실시간성을 위해 <span className="text-primary font-semibold">WebSocket 기반 통신</span>을 도입했고,
+					접속/퇴장 이벤트, 타이머 처리, 메시지 동기화 등을 Vue 프론트엔드와 Spring Boot 백엔드에서 분산 처리했습니다.
+				</p>
+				<p className="mb-2">
+					백엔드는 <span className="text-primary font-semibold">Spring의 StompHandler</span>를 활용해 세션별 사용자
+					구분과 게임 룸 관리, 채널 구독 등을 구현했으며,
+					<span className="text-primary font-semibold">Vue에서는 Ref, Reactive, Store</span>를 조합해 상태 관리를
+					세분화했습니다.
+				</p>
+				<p className="mb-2">
+					게임 흐름 제어를 위해{" "}
+					<span className="text-primary font-semibold">턴 제어 로직, 게임 종료 조건, 동시 접속자 제한</span>을 구현했고,{" "}
+					<span className="text-primary font-semibold">연결 해제 감지 및 에러 처리</span>도 설계했습니다.
+				</p>
+				<p className="mb-2">
+					배포는 <span className="text-primary font-semibold">Docker 기반으로 자동화</span>하고,
+					<span className="text-primary font-semibold">Github Actions + EC2 + RDS</span>를 활용해 웹소켓 서버를
+					안정적으로 운영했습니다.
+				</p>
+				<p>
+					이 프로젝트를 통해 <span className="text-primary font-semibold">실시간 양방향 통신 설계</span>,
+					<span className="text-primary font-semibold">게임 흐름 상태 관리</span>,
+					<span className="text-primary font-semibold">실서비스 수준의 배포 및 장애 대응 설계</span>를 경험하며 시스템적
+					시야를 넓힐 수 있었습니다.
+				</p>
+			</>
+		),
 	},
 ];
 
